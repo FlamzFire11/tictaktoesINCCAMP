@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var currentPlayer = "X"
     var body: some View {
         NavigationView {
             VStack {
