@@ -1,19 +1,22 @@
 //
-//  Untitled.swift
-//  tictaktoes
+//  Grid1.swift
+//  tiktaktoes
 //
-//  Created by souper shy on 12/11/24.
+//  Created by Nguyen Dylan on 12/11/24.
 //
+
 import SwiftUI
 
 struct TicTacToeView: View {
+
     // The game state: Board (3x3 array), current player, winner
     @State private var board: [[String]] = [
         ["", "", ""], // Row 1
         ["", "", ""], // Row 2
         ["", "", ""]  // Row 3
     ]
-    @Binding var currentPlayer: String 
+    
+    @Binding var currentPlayer: String
     @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA
@@ -144,18 +147,6 @@ struct TicTacToeView: View {
         ]
         currentPlayer = "X"
         winner = ""  // Reset winner
-    }
-}
-
-// Color extension to handle hex code color
-extension Color {
-    init(hex: Int) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255
-        )
     }
 }
 

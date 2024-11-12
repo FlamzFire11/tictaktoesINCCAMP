@@ -1,13 +1,13 @@
 //
 //  ContentView.swift
-//  tictaktoes
+//  tiktaktoes
 //
-//  Created by souper shy on 12/11/24.
+//  Created by Nguyen Dylan on 12/11/24.
 //
+
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentPlayer = "X"
     var body: some View {
         NavigationView {
             VStack {
@@ -109,8 +109,7 @@ struct ContentView: View {
             }
         }
 
+
 #Preview {
     ContentView()
 }
-
-
