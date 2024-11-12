@@ -23,7 +23,7 @@ struct TicTacToeView4: View {
         ["", "", ""]  // Row 3
     ]
     
-    @State private var currentPlayer: String = "X"
+    @Binding var currentPlayer: String
     @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA

@@ -18,15 +18,13 @@ extension Color {
     }
 }
 struct TicTacToeView: View {
-    
     // The game state: Board (3x3 array), current player, winner
     @State private var board: [[String]] = [
         ["", "", ""], // Row 1
         ["", "", ""], // Row 2
         ["", "", ""]  // Row 3
     ]
-    
-    @State private var currentPlayer: String = "X"
+    @Binding var currentPlayer: String 
     @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA

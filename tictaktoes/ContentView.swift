@@ -7,12 +7,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var currentPlayer = "X"
     var body: some View {
         NavigationView {
             VStack {
                 HStack {
                     // A NavigationLink to the TicTacToeGridView
-                    NavigationLink(destination: TicTacToeView(), label: {
+                    NavigationLink(destination: TicTacToeView(currentPlayer: $currentPlayer), label: {
                         Text("Board 1")
                             .font(.title)
                             .padding()
@@ -21,7 +22,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView2(), label: {
+                    NavigationLink(destination: TicTacToeView2(currentPlayer: $currentPlayer), label: {
                         Text("Board 2")
                             .font(.title)
                             .padding()
@@ -30,7 +31,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView3(), label: {
+                    NavigationLink(destination: TicTacToeView3(currentPlayer: $currentPlayer), label: {
                         Text("Board 3")
                             .font(.title)
                             .padding()
@@ -42,7 +43,7 @@ struct ContentView: View {
                 }
                 HStack {
                     // A NavigationLink to the TicTacToeGridView
-                    NavigationLink(destination: TicTacToeView4(), label: {
+                    NavigationLink(destination: TicTacToeView4(currentPlayer: $currentPlayer), label: {
                         Text("Board 1")
                             .font(.title)
                             .padding()
@@ -51,7 +52,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView5(), label: {
+                    NavigationLink(destination: TicTacToeView5(currentPlayer: $currentPlayer), label: {
                         Text("Board 2")
                             .font(.title)
                             .padding()
@@ -60,7 +61,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView6(), label: {
+                    NavigationLink(destination: TicTacToeView6(currentPlayer: $currentPlayer), label: {
                         Text("Board 3")
                             .font(.title)
                             .padding()
@@ -72,7 +73,7 @@ struct ContentView: View {
                 }
                 HStack {
                     // A NavigationLink to the TicTacToeGridView
-                    NavigationLink(destination: TicTacToeView7(), label: {
+                    NavigationLink(destination: TicTacToeView7(currentPlayer: $currentPlayer), label: {
                         Text("Board 1")
                             .font(.title)
                             .padding()
@@ -81,7 +82,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView8(), label: {
+                    NavigationLink(destination: TicTacToeView8(currentPlayer: $currentPlayer), label: {
                         Text("Board 2")
                             .font(.title)
                             .padding()
@@ -90,7 +91,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .shadow(radius: 5)
                     })
-                    NavigationLink(destination: TicTacToeView9(), label: {
+                    NavigationLink(destination: TicTacToeView9(currentPlayer: $currentPlayer), label: {
                         Text("Board 3")
                             .font(.title)
                             .padding()
