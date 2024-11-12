@@ -159,6 +159,6 @@ struct TicTacToeView2: View {
 
 struct TicTacToeView_Previews2: PreviewProvider {
     static var previews: some View {
-        TicTacToeView()
+        TicTacToeView(currentPlayer: .constant("X"))
     }
 }

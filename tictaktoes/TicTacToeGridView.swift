@@ -161,6 +161,6 @@ extension Color {
 
 struct TicTacToeView_Previews: PreviewProvider {
     static var previews: some View {
-        TicTacToeView()
+        TicTacToeView(currentPlayer: .constant("X"))
     }
 }
