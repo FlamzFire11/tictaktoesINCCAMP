@@ -1,4 +1,12 @@
 //
+//  TicTacToeView 8.swift
+//  tictaktoes
+//
+//  Created by Nguyen Dylan on 12/11/24.
+//
+
+
+//
 //  Untitled.swift
 //  tictaktoes
 //
@@ -6,18 +14,7 @@
 //
 import SwiftUI
 
-extension Color {
-    init(hex: Int, opacity: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: opacity
-        )
-    }
-}
-struct TicTacToeView: View {
+struct TicTacToeView9: View {
     
     // The game state: Board (3x3 array), current player, winner
     @State private var board: [[String]] = [
@@ -160,19 +157,7 @@ struct TicTacToeView: View {
     }
 }
 
-// Color extension to handle hex code color
-extension Color {
-    init(hex: Int) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255
-        )
-    }
-}
-
-struct TicTacToeView_Previews: PreviewProvider {
+struct TicTacToeView_Previews9: PreviewProvider {
     static var previews: some View {
         TicTacToeView()
     }
