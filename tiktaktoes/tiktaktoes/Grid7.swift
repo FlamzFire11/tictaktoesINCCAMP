@@ -1,21 +1,15 @@
 //
-//  TicTacToeView 5.swift
-//  tictaktoes
+//  TicTacToeView 6.swift
+//  tiktaktoes
 //
 //  Created by Nguyen Dylan on 12/11/24.
 //
 
 
-//
-//  Untitled.swift
-//  tictaktoes
-//
-//  Created by souper shy on 12/11/24.
-//
 import SwiftUI
 
-struct TicTacToeView6: View {
-    
+struct TicTacToeView7: View {
+
     // The game state: Board (3x3 array), current player, winner
     @State private var board: [[String]] = [
         ["", "", ""], // Row 1
@@ -157,7 +151,7 @@ struct TicTacToeView6: View {
     }
 }
 
-struct TicTacToeView_Previews6: PreviewProvider {
+struct TicTacToeView_Previews7: PreviewProvider {
     static var previews: some View {
         TicTacToeView(currentPlayer: .constant("X"))
     }

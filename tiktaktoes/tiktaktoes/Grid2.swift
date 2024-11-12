@@ -1,21 +1,15 @@
 //
-//  TicTacToeView 6.swift
-//  tictaktoes
+//  TicTacToeView.swift
+//  tiktaktoes
 //
 //  Created by Nguyen Dylan on 12/11/24.
 //
 
 
-//
-//  Untitled.swift
-//  tictaktoes
-//
-//  Created by souper shy on 12/11/24.
-//
 import SwiftUI
 
-struct TicTacToeView7: View {
-    
+struct TicTacToeView2: View {
+
     // The game state: Board (3x3 array), current player, winner
     @State private var board: [[String]] = [
         ["", "", ""], // Row 1
@@ -23,7 +17,7 @@ struct TicTacToeView7: View {
         ["", "", ""]  // Row 3
     ]
     
-    @Binding var currentPlayer: String
+    @Binding var currentPlayer: String 
     @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA
@@ -157,8 +151,7 @@ struct TicTacToeView7: View {
     }
 }
 
-
-struct TicTacToeView_Previews7: PreviewProvider {
+struct TicTacToeView_Previews2: PreviewProvider {
     static var previews: some View {
         TicTacToeView(currentPlayer: .constant("X"))
     }
