@@ -19,7 +19,7 @@ struct TicTacToeView: View {
     @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA
-    let primaryColor = Color(hex: "#D980FA")
+    let primaryColor = Color(hex: 0xD980FA)
     
     // Main body of the view
     var body: some View {
@@ -151,23 +151,14 @@ struct TicTacToeView: View {
 
 // Color extension to handle hex code color
 extension Color {
-    init(hex: String) {
-        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-        
-        if hexSanitized.count == 6 {
-            let scanner = Scanner(string: hexSanitized)
-            var rgb: UInt64 = 0
-            scanner.scanHexInt64(&rgb)
-            
-            let red = Double((rgb & 0xFF0000) >> 16) / 255.0
-            let green = Double((rgb & 0x00FF00) >> 8) / 255.0
-            let blue = Double(rgb & 0x0000FF) / 255.0
-            
-            self.init(red: red, green: green, blue: blue)
-        } else {
-            self.init(red: 0, green: 0, blue: 0)
-        }
+    init(hex: Int, opacity: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xff) / 255,
+            green: Double((hex >> 08) & 0xff) / 255,
+            blue: Double((hex >> 00) & 0xff) / 255,
+            opacity: opacity
+        )
     }
 }
 
