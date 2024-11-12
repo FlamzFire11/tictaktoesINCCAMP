@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-// The main view for Tic-Tac-Toe
 struct TicTacToeView: View {
     
     // The game state: Board (3x3 array), current player, winner
@@ -17,7 +16,7 @@ struct TicTacToeView: View {
     ]
     
     @State private var currentPlayer: String = "X"
-    @State private var winner: String? = nil
+    @State private var winner: String = ""  // Empty string means no winner
     
     // Define the custom color #D980FA
     let primaryColor = Color(hex: "#D980FA")
@@ -27,17 +26,17 @@ struct TicTacToeView: View {
         NavigationStack {
             VStack {
                 // Display current turn or winner message
-                Text(winner == nil ? "\(currentPlayer)'s Turn" : "\(winner!) Wins!")
+                Text(winner == "" ? "\(currentPlayer)'s Turn" : "\(winner) Wins!")
                     .font(.title)
                     .foregroundColor(primaryColor)
                     .padding()
                 
                 // Create the Tic-Tac-Toe grid
-                VStack(spacing: 0) {
+                VStack {
                     ForEach(0..<3, id: \.self) { row in
-                        HStack(spacing: 0) {
+                        HStack {
                             // Create a column of buttons for each row
-                            ForEach(0..<3, id: \.self) { col in
+                            ForEach(0..<3) { col in
                                 Button(action: {
                                     makeMove(row: row, col: col)
                                 }) {
@@ -49,7 +48,6 @@ struct TicTacToeView: View {
                                         .border(primaryColor, width: 2)
                                         .foregroundColor(primaryColor)
                                 }
-                                .disabled(board[row][col] != "" || winner != nil)
                             }
                         }
                     }
@@ -57,7 +55,7 @@ struct TicTacToeView: View {
                 .padding()
                 
                 // Restart button (only visible if there is a winner)
-                if winner != nil {
+                if winner != "" {
                     Button(action: restartGame) {
                         Text("Restart Game")
                             .font(.title2)
@@ -70,9 +68,6 @@ struct TicTacToeView: View {
                 }
             }
             .padding()
-            .background(Color.white)  // The background color of the game board
-            .cornerRadius(15)
-            .shadow(radius: 10)
             .navigationTitle("Tic-Tac-Toe")
         }
     }
@@ -80,7 +75,7 @@ struct TicTacToeView: View {
     // Function to handle a player's move
     func makeMove(row: Int, col: Int) {
         // Only proceed if the cell is empty and there is no winner
-        if board[row][col] == "" && winner == nil {
+        if board[row][col] == "" && winner == "" {
             board[row][col] = currentPlayer
             
             // Check for winner after the move
@@ -124,7 +119,7 @@ struct TicTacToeView: View {
             ["", "", ""]  // Row 3
         ]
         currentPlayer = "X"
-        winner = nil
+        winner = ""  // Reset winner
     }
 }
 
