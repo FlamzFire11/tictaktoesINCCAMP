@@ -25,11 +25,23 @@ struct TicTacToeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                // Display current turn or winner message
-                Text(winner == "" ? "\(currentPlayer)'s Turn" : "\(winner) Wins!")
-                    .font(.title)
-                    .foregroundColor(primaryColor)
-                    .padding()
+                // Display current turn, winner message, or draw message
+                if winner == "" {
+                    Text("\(currentPlayer)'s Turn")
+                        .font(.title)
+                        .foregroundColor(primaryColor)
+                        .padding()
+                } else if winner == "Draw" {
+                    Text("It's a Draw!")
+                        .font(.title)
+                        .foregroundColor(primaryColor)
+                        .padding()
+                } else {
+                    Text("\(winner) Wins!")
+                        .font(.title)
+                        .foregroundColor(primaryColor)
+                        .padding()
+                }
                 
                 // Create the Tic-Tac-Toe grid
                 VStack {
@@ -54,7 +66,7 @@ struct TicTacToeView: View {
                 }
                 .padding()
                 
-                // Restart button (only visible if there is a winner)
+                // Restart button (only visible if there is a winner or draw)
                 if winner != "" {
                     Button(action: restartGame) {
                         Text("Restart Game")
@@ -74,13 +86,15 @@ struct TicTacToeView: View {
     
     // Function to handle a player's move
     func makeMove(row: Int, col: Int) {
-        // Only proceed if the cell is empty and there is no winner
+        // Only proceed if the cell is empty and there is no winner or draw
         if board[row][col] == "" && winner == "" {
             board[row][col] = currentPlayer
             
             // Check for winner after the move
             if checkForWinner() {
                 winner = currentPlayer
+            } else if checkForDraw() {
+                winner = "Draw"
             } else {
                 // Switch turns between X and O
                 currentPlayer = (currentPlayer == "X") ? "O" : "X"
@@ -109,6 +123,18 @@ struct TicTacToeView: View {
         }
         
         return false
+    }
+    
+    // Function to check for a draw (if the board is full and there's no winner)
+    func checkForDraw() -> Bool {
+        for row in board {
+            for cell in row {
+                if cell == "" {
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     // Function to restart the game
