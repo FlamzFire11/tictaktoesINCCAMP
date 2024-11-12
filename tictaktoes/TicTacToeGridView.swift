@@ -6,81 +6,96 @@
 //
 import SwiftUI
 
-// Game logic and view
+// The main view for Tic-Tac-Toe
 struct TicTacToeView: View {
     
-    @State private var board: [[String]] = Array(repeating: Array(repeating: "", count: 3), count: 3)
+    // The game state: Board (3x3 array), current player, winner
+    @State private var board: [[String]] = [
+        ["", "", ""], // Row 1
+        ["", "", ""], // Row 2
+        ["", "", ""]  // Row 3
+    ]
+    
     @State private var currentPlayer: String = "X"
-    @State private var winner: String?
+    @State private var winner: String? = nil
     
-    let primaryColor = Color(hex: "#D980fa")
+    // Define the custom color #D980FA
+    let primaryColor = Color(hex: "#D980FA")
     
+    // Main body of the view
     var body: some View {
-        VStack {
-            // Title and Winner Display
-            Text(winner == nil ? "\(currentPlayer)'s Turn" : "\(winner!) Wins!")
-                .font(.title)
-                .foregroundColor(primaryColor)
-                .padding()
-            
-            // The Tic-Tac-Toe Grid
-            VStack(spacing: 0) {
-                ForEach(0..<3, id: \.self) { row in
-                    HStack(spacing: 0) {
-                        ForEach(0..<3, id: \.self) { col in
-                            Button(action: {
-                                makeMove(row: row, col: col)
-                            }) {
-                                Text(board[row][col])
-                                    .font(.system(size: 40))
-                                    .foregroundColor(primaryColor)
-                                    .frame(width: 100, height: 100)
-                                    .background(Color.white)
-                                    .cornerRadius(10)
-                                    .border(primaryColor, width: 2)
-                                    .padding(2)
+        NavigationStack {
+            VStack {
+                // Display current turn or winner message
+                Text(winner == nil ? "\(currentPlayer)'s Turn" : "\(winner!) Wins!")
+                    .font(.title)
+                    .foregroundColor(primaryColor)
+                    .padding()
+                
+                // Create the Tic-Tac-Toe grid
+                VStack(spacing: 0) {
+                    ForEach(0..<3, id: \.self) { row in
+                        HStack(spacing: 0) {
+                            // Create a column of buttons for each row
+                            ForEach(0..<3, id: \.self) { col in
+                                Button(action: {
+                                    makeMove(row: row, col: col)
+                                }) {
+                                    Text(board[row][col])
+                                        .font(.system(size: 40))
+                                        .frame(width: 100, height: 100)
+                                        .background(Color.white)
+                                        .cornerRadius(10)
+                                        .border(primaryColor, width: 2)
+                                        .foregroundColor(primaryColor)
+                                }
+                                .disabled(board[row][col] != "" || winner != nil)
                             }
-                            .disabled(board[row][col] != "" || winner != nil)
                         }
                     }
                 }
+                .padding()
+                
+                // Restart button (only visible if there is a winner)
+                if winner != nil {
+                    Button(action: restartGame) {
+                        Text("Restart Game")
+                            .font(.title2)
+                            .padding()
+                            .background(primaryColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding()
+                }
             }
             .padding()
-            
-            // Restart Button
-            if winner != nil {
-                Button(action: restartGame) {
-                    Text("Restart Game")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(primaryColor)
-                        .cornerRadius(10)
-                }
-                .padding()
-            }
+            .background(Color.white)  // The background color of the game board
+            .cornerRadius(15)
+            .shadow(radius: 10)
+            .navigationTitle("Tic-Tac-Toe")
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(15)
-        .shadow(radius: 10)
     }
     
-    // Handle player's move
+    // Function to handle a player's move
     func makeMove(row: Int, col: Int) {
+        // Only proceed if the cell is empty and there is no winner
         if board[row][col] == "" && winner == nil {
             board[row][col] = currentPlayer
+            
+            // Check for winner after the move
             if checkForWinner() {
                 winner = currentPlayer
             } else {
+                // Switch turns between X and O
                 currentPlayer = (currentPlayer == "X") ? "O" : "X"
             }
         }
     }
     
-    // Check if there's a winner
+    // Function to check if a player has won
     func checkForWinner() -> Bool {
-        // Check rows, columns, and diagonals
+        // Check rows, columns, and diagonals for a win
         for i in 0..<3 {
             if board[i][0] == currentPlayer && board[i][1] == currentPlayer && board[i][2] == currentPlayer {
                 return true
@@ -101,15 +116,19 @@ struct TicTacToeView: View {
         return false
     }
     
-    // Restart the game
+    // Function to restart the game
     func restartGame() {
-        board = Array(repeating: Array(repeating: "", count: 3), count: 3)
+        board = [
+            ["", "", ""], // Row 1
+            ["", "", ""], // Row 2
+            ["", "", ""]  // Row 3
+        ]
         currentPlayer = "X"
         winner = nil
     }
 }
 
-// Color extension for hex color values
+// Color extension to handle hex code color
 extension Color {
     init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
